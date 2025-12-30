@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    # 1. 设置 QEMU 模拟器（跨平台构建核心）
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      
+    # 2. 设置 Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    # 3. 构建 ARMv7 镜像
+    - name: Build ARMv7 Image
+      run: |
+        docker buildx build --platform linux/arm/v7 \
+          -t my-pansou:latest --load .
+
