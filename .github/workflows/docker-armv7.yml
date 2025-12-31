@@ -15,8 +15,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.Name }}
+          password: ${{ secrets.Secret }}
 
       # 2. 设置 QEMU (如果你要构建 ARMv7 镜像，必须加这步)
       - name: Set up QEMU
